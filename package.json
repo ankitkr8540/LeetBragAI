@@ -1,66 +1,29 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@apollo/client": "^3.10.4",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.97",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "apollo-server": "^3.13.0",
-    "axios": "^1.7.2",
-    "graphql": "^16.8.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-redux": "^7.2.6",
-    "react-router-component": "^0.40.0",
-    "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
-    "redux": "^4.1.2",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.1",
-    "stream-http": "^3.2.0",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "leetbragai",
+  "version": "1.0.0",
+  "description": "Backend for the leetBragAI using mongoDB",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "webpack --config webpack.config.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "watch": "webpack -w --config webpack.config.js"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "Ankit Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.4.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "copy-webpack-plugin": "^12.0.2",
-    "css-loader": "^7.1.2",
-    "html-webpack-plugin": "^5.6.0",
-    "nodemon": "^3.1.1",
-    "ts-loader": "^9.5.1",
-    "ts-node": "^10.9.2",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4"
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.2"
   }
 }
