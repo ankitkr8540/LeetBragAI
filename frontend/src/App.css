@@ -1,10 +1,48 @@
-.App {
-  color: white;
-  text-align: center;
+:root {
+  --primary-zinc: #fafafa;
+  --secondary-zinc: #f4f4f5;
+
+  --text-primary-light: #18181b;
+  --text-primary-dark: #fafafa;
+
+  --text-secondary-light: #71717a;
+  --text-secondary-dark: #a1a1aa;
+
+  --bg-primary-light: #e4e4e7;
+  --bg-primary-dark: #18181b;
+
+  --bg-secondary-light: #27272a;
+  --bg-secondary-dark: #18181b;
+
+  --bg-navbar-light: #fafafa;
+  --bg-navbar-dark: #18181b;
+
+  --font-size: 16px;
+  --font-family: 'open sans';
+  --font-weight: 400;
+  --line-height: 1.5;
+  --letter-spacing: 0.5px;
+  --transition: all 0.3s linear;
 }
 
-.container {
-  width: 25rem;
-  height: 25rem;
-  background-color: green;
+.light-theme {
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --bg-navbar: var(--bg-navbar-light);
+}
+
+.dark-theme {
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --bg-navbar: var(--bg-navbar-dark);
+}
+.App {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-family: var(--font-family);
+  letter-spacing: var(--letter-spacing);
 }
