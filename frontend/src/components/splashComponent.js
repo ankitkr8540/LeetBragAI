@@ -1,6 +1,7 @@
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
+import firstPage from '../assets/Hero.png'
 
 const boxVariant = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
@@ -27,7 +28,7 @@ const Box = ({ num }) => {
       initial='hidden'
       animate={control}
     >
-      <h1>Box {num} </h1>
+      <motion.img src={firstPage} />
     </motion.div>
   )
 }
