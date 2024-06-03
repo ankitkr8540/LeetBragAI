@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import { motion } from 'framer-motion'
-import { Container } from '@mui/material'
-import Box from '../../components/splashComponent'
+import React, { useContext } from 'react';
+import { motion } from 'framer-motion';
+import { Container } from '@mui/material';
+import SplashComponent from '../../components/splashComponent';
 
 export default function SplashScreen() {
   return (
     <Container>
-      <Box />
+      <SplashComponent />
       {/* <Box num={3} /> */}
       <div className='button_container'>
         <motion.div
@@ -25,5 +25,5 @@ export default function SplashScreen() {
         </motion.div>
       </div>
     </Container>
-  )
+  );
 }
