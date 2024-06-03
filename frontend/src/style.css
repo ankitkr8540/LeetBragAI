@@ -15,10 +15,56 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-navbar);
+  /* background-color: var(--bg-primary);
+  color: var(--text-primary); */
 }
 
 .box {
   height: 100vh;
   /* color: var(--text-primary); */
+}
+.toggle-button {
+  float: right;
+  display: flex;
+}
+.switch {
+  width: 45px;
+  height: 21px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 50px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.switch[data-isOn='true'] {
+  justify-content: flex-end;
+}
+
+.handle {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 40px;
+}
+
+.navStyles {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  height: 6rem;
+  padding: 0 2rem;
+  width: calc(100vw - 4rem);
+  left: 0;
+  font-size: 25px;
+}
+
+.navLinksWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
 }

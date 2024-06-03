@@ -2,14 +2,12 @@ import React, { useContext } from 'react'
 import { motion } from 'framer-motion'
 import { Container } from '@mui/material'
 import Box from '../../components/splashComponent'
-import { ThemeContext } from '../../Theme'
 
 export default function SplashScreen() {
   return (
     <Container>
-      <Box num={1} />
-      <Box num={2} />
-      <Box num={3} />
+      <Box />
+      {/* <Box num={3} /> */}
       <div className='button_container'>
         <motion.div
           className='button'
