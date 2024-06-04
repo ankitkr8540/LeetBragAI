@@ -1,7 +1,7 @@
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import firstPage from '../assets/Hero.png';
+// import firstPage from '../assets/Hero.png';
 
 const boxVariant = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
@@ -28,7 +28,7 @@ const SplashComponent = ({ num }) => {
       initial='hidden'
       animate={control}
     >
-      <motion.img src={firstPage} />
+      {/* <motion.img src={firstPage} /> */}
     </motion.div>
   );
 };

@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react'
-import './App.css'
-import Clients from './screens/Clients'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Container } from '@mui/material'
-import SplashScreen from './screens/splash/SplashScreen'
-import { ThemeContext } from './Theme'
-import { motion } from 'framer-motion'
-import './style.css'
-import Header from './components/Header'
+import React, { useContext, useState } from 'react';
+import './App.css';
+import Clients from './screens/Clients';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Container } from '@mui/material';
+import SplashScreen from './screens/splash/SplashScreen';
+import { ThemeContext } from './Theme';
+import { motion } from 'framer-motion';
+import './style.css';
+import Header from './components/Header';
 
 function App() {
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
   return (
     <div className={`App ${theme}`}>
       <Router>
@@ -23,7 +23,7 @@ function App() {
         {/* </Container> */}
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

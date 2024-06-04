@@ -68,3 +68,13 @@
   justify-content: space-between;
   width: 50%;
 }
+
+.splash-screen-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  
+}
