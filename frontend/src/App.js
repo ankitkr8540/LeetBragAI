@@ -8,6 +8,8 @@ import { ThemeContext } from './Theme'
 import { motion } from 'framer-motion'
 import './style.css'
 import Header from './components/Header'
+import Home from './screens/Home'
+import LoginScreen from './screens/Login'
 
 function App() {
   const { theme } = useContext(ThemeContext)
@@ -17,7 +19,7 @@ function App() {
         <Header />
         {/* <Container> */}
         <Routes>
-          <Route path='/' element={<SplashScreen />} />
+          <Route path='/' element={<Home />} />
           <Route path='/:username' element={<Clients />} />
         </Routes>
         {/* </Container> */}

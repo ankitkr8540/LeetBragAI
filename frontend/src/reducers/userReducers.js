@@ -24,7 +24,7 @@ export const GetUserReducer = (state = {}, action) => {
     case GET_USER:
       return { loading: true }
     case GET_USER_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { loading: false, leetCode_info: action.payload }
     case GET_USER_FAIL:
       return { loading: false, error: action.payload }
     default:

@@ -8,7 +8,7 @@ const boxVariant = {
   hidden: { opacity: 0, scale: 0 },
 }
 
-const Box = ({ num }) => {
+const SplashComponent = ({ num }) => {
   const control = useAnimation()
   const [ref, inView] = useInView()
 
@@ -33,4 +33,4 @@ const Box = ({ num }) => {
   )
 }
 
-export default Box
+export default SplashComponent

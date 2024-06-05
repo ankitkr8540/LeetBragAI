@@ -11,7 +11,7 @@ import {
 } from './reducers/userReducers'
 
 const reducer = combineReducers({
-  user: GetUserReducer,
+  leetCode: GetUserReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -24,6 +24,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  leetCode: { leetCode_info: [] },
 }
 
 const middleware = [thunk]

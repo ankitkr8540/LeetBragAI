@@ -54,18 +54,20 @@ export const login = (username, password) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     }
-    console.log('login function actions ', username, password)
-    const { data } = await axios.post(
-      '/api/users/login',
-      { username, password },
-      config
-    )
+    if (username === getUserInfo(username).username) {
+      console.log('Username exists')
+      const { data } = await axios.post(
+        '/api/users/login',
+        { username, password },
+        config
+      )
 
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: data,
-    })
-    localStorage.setItem('userInfo', JSON.stringify(data))
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: data,
+      })
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    }
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,

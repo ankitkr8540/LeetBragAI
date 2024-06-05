@@ -11,6 +11,11 @@ const LoginScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
 
+  console.log()
+
+  const leetCode_info = useSelector((state) => state.leetCode.leetCode_info)
+  console.log(leetCode_info.username)
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(username, password))

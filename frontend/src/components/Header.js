@@ -3,13 +3,7 @@ import React, { useContext, useState } from 'react'
 import { ThemeContext } from '../Theme'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 
-const linkList = [
-  'About',
-  'News Letter',
-  'Contact Us',
-  'Contributors',
-  'Get Started',
-]
+const linkList = ['Getting Started', 'Sign In']
 const parentVariants = {
   visible: { opacity: 1, y: 0 },
   hidden: { opacity: 0, y: '-4rem' },
