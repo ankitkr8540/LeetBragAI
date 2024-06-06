@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import './App.css'
 import Clients from './screens/Clients'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'

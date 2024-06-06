@@ -20,21 +20,7 @@ export default function Clients() {
     return <div>Loading...</div>
   }
 
-  const {
-    name,
-    avatar,
-    ranking,
-    reputation,
-    gitHub,
-    twitter,
-    linkedIN,
-    website,
-    country,
-    company,
-    school,
-    skillTags,
-    about,
-  } = leetCode_info
+  const { name, avatar, ranking, reputation } = leetCode_info
 
   return (
     <div>
@@ -42,15 +28,6 @@ export default function Clients() {
       <img src={avatar} alt={name} />
       <p>Ranking: {ranking}</p>
       <p>Reputation: {reputation}</p>
-      {/* <p>GitHub: {gitHub}</p>
-            <p>Twitter: {twitter}</p>
-            <p>LinkedIn: {linkedIN}</p>
-            <p>Website: {website.join(', ')}</p>
-            <p>Country: {country}</p>
-            <p>Company: {company}</p>
-            <p>School: {school}</p>
-            <p>Skills: {skillTags.join(', ')}</p>
-            <p>About: {about}</p> */}
     </div>
   )
 }
