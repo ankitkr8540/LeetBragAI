@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '../utils/cn'
 
-export function Splash_first() {
+export function SplashFirst() {
   return (
     <LampContainer>
       <motion.h1

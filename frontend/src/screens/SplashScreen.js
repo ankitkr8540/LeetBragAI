@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { Splash_first } from '../components/splashFirst'
+import { SplashFirst } from '../components/splashFirst'
 
 export default function SplashScreen() {
   return (
     <>
-      <Splash_first />
+      <SplashFirst />
       <div className="button_container">
         <motion.div
           className="button"
