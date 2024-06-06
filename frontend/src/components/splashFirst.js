@@ -1,9 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '../utils/cn'
-import Header from './Header'
 
-export function LampDemo() {
+export function Splash_first() {
   return (
     <LampContainer>
       <motion.h1
@@ -26,7 +25,7 @@ export const LampContainer = ({ children, className }) => {
   return (
     <div
       className={cn(
-        'relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0',
+        'relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full z-0',
         className
       )}
     >
