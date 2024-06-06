@@ -60,6 +60,7 @@
   width: calc(100vw - 4rem);
   left: 0;
   font-size: 25px;
+  z-index: 1;
 }
 
 .navLinksWrapper {

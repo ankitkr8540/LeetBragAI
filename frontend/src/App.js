@@ -19,7 +19,7 @@ function App() {
         <Header />
         {/* <Container> */}
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<SplashScreen />} />
           <Route path='/:username' element={<Clients />} />
         </Routes>
         {/* </Container> */}
