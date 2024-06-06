@@ -9,13 +9,11 @@ export default function Clients() {
 
   useEffect(() => {
     dispatch(getUserInfo(username))
-  }, [dispatch, username]) // dependencies of the effect
+  }, [dispatch, username])
 
-  // Get the userInfo from the Redux state
   const leetCode_info = useSelector((state) => state.leetCode.leetCode_info)
   console.log(leetCode_info)
 
-  // Check if userInfo exists and if it's loading
   if (!leetCode_info) {
     return <div>Loading...</div>
   }
