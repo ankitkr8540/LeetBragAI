@@ -15,7 +15,7 @@ export default function Clients() {
   console.log(leetCode_info)
 
   if (!leetCode_info) {
-    return <div>Loading...</div>
+    return <div>Loading..</div>
   }
 
   const { name, avatar, ranking, reputation } = leetCode_info
