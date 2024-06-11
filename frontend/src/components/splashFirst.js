@@ -16,7 +16,10 @@ export function SplashFirst() {
         className="bg-gradient-to-br from-slate-300 to-slate-500 pb-44 bg-clip-text text-center 
         text-4xl font-medium tracking-tight text-transparent md:text-6xl"
       >
-        Build future <br /> the right way
+        AI-Powered Professional Bragging <br />
+        <div className="mt-2 md:mt-0.5 md:text-3xl text-xl">
+          Your Achievements, Perfectly Phrased
+        </div>
       </motion.h1>
     </LampContainer>
   );
