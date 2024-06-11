@@ -1,15 +1,8 @@
-import { Container } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ThemeContext } from '../Theme'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 
-const linkList = [
-  'About',
-  'News Letter',
-  'Contact Us',
-  'Contributors',
-  'Get Started',
-]
+const linkList = ['Getting Started', 'Sign In']
 const parentVariants = {
   visible: { opacity: 1, y: 0 },
   hidden: { opacity: 0, y: '-4rem' },
@@ -51,7 +44,7 @@ function Header() {
   })
   return (
     <motion.nav
-      className='navStyles'
+      className="navStyles"
       variants={parentVariants}
       animate={hidden ? 'hidden' : 'visible'}
       transition={{
@@ -61,7 +54,7 @@ function Header() {
       }}
     >
       <p>Logo</p>
-      <div className='navLinksWrapper'>
+      <div className="navLinksWrapper">
         {linkList.map((item, i) => (
           <motion.div /** ... **/
             key={i}
@@ -75,14 +68,14 @@ function Header() {
           </motion.div>
         ))}
         <div
-          className='switch'
-          data-isOn={isOn}
+          className="switch"
+          data-ison={isOn}
           onClick={() => {
             toggleTheme()
             toggleSwitch()
           }}
         >
-          <motion.div className='handle' layout transition={spring} />
+          <motion.div className="handle" layout transition={spring} />
         </div>
       </div>
     </motion.nav>

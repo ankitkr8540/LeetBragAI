@@ -15,8 +15,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: var(--bg-primary);
-  color: var(--text-primary); */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .box {
@@ -39,7 +39,7 @@
   cursor: pointer;
 }
 
-.switch[data-isOn='true'] {
+.switch[data-ison='true'] {
   justify-content: flex-end;
 }
 
@@ -60,6 +60,7 @@
   width: calc(100vw - 4rem);
   left: 0;
   font-size: 25px;
+  z-index: 1;
 }
 
 .navLinksWrapper {

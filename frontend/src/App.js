@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import './App.css'
 import Clients from './screens/Clients'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Container } from '@mui/material'
-import SplashScreen from './screens/splash/SplashScreen'
+import SplashScreen from './screens/SplashScreen'
 import { ThemeContext } from './Theme'
-import { motion } from 'framer-motion'
 import './style.css'
 import Header from './components/Header'
 
@@ -17,8 +15,8 @@ function App() {
         <Header />
         {/* <Container> */}
         <Routes>
-          <Route path='/' element={<SplashScreen />} />
-          <Route path='/:username' element={<Clients />} />
+          <Route path="/" element={<SplashScreen />} />
+          <Route path="/:username" element={<Clients />} />
         </Routes>
         {/* </Container> */}
       </Router>
