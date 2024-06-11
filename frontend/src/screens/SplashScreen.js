@@ -1,12 +1,12 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { SplashFirst } from '../components/splashFirst'
+import React from "react";
+import { motion } from "framer-motion";
+import { SplashFirst } from "../components/splashFirst";
 
 export default function SplashScreen() {
   return (
-    <>
+    <div>
       <SplashFirst />
-      <div className="button_container">
+      {/* <div className="button_container">
         <motion.div
           className="button"
           whileHover={{ scale: 1.1 }}
@@ -21,7 +21,7 @@ export default function SplashScreen() {
         >
           Join Us
         </motion.div>
-      </div>
-    </>
-  )
+      </div> */}
+    </div>
+  );
 }

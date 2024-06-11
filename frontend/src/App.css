@@ -17,8 +17,6 @@
   --bg-navbar-light: #fafafa;
   --bg-navbar-dark: #18181b;
 
-  --font-size: 16px;
-  --font-family: 'open sans';
   --font-weight: 400;
   --line-height: 1.5;
   --letter-spacing: 0.5px;
@@ -43,6 +41,5 @@
 .App {
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  font-family: var(--font-family);
   letter-spacing: var(--letter-spacing);
 }
