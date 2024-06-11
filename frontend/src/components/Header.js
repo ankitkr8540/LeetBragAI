@@ -32,7 +32,7 @@ function Header() {
   });
   return (
     <motion.nav
-      className="navStyles font-openSansRegular text-lg"
+      className="navStyles font-openSansRegular md:text-lg text-sm"
       variants={parentVariants}
       animate={hidden ? "hidden" : "visible"}
       transition={{
