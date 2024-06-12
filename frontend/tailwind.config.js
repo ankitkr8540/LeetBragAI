@@ -6,6 +6,7 @@ module.exports = {
   },
   fontFamily: {
     openSansRegular: ["Open-Sans", "sans-serif"],
+    openSansMedium: ["Open-Sans-Medium", "sans-serif"],
   },
   variants: {
     extend: {},

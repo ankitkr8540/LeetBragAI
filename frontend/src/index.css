@@ -15,3 +15,8 @@ body {
   font-family: "Open-Sans";
   src: url("../src/assets/fonts/OpenSans-Regular.ttf");
 }
+
+@font-face {
+  font-family: "Open-Sans-Medium";
+  src: url("../src/assets/fonts/OpenSans-Medium.ttf");
+}

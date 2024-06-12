@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
+import LoginScreen from "../screens/Login";
 
 export function SplashFirst() {
   return (
@@ -13,7 +14,7 @@ export function SplashFirst() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="bg-gradient-to-br from-slate-300 to-slate-500 pb-48 bg-clip-text text-center 
+        className="bg-gradient-to-br from-slate-300 to-slate-500 mb-20 bg-clip-text text-center 
         text-4xl font-medium tracking-tight text-transparent md:text-6xl"
       >
         AI-Powered Professional Bragging <br />
@@ -26,6 +27,14 @@ export function SplashFirst() {
 }
 
 export const LampContainer = ({ children, className }) => {
+  const [signIn, setSignIn] = useState(false);
+
+  const handleSignInButtonClick = (e) => {
+    console.log("Button clicked");
+    setSignIn(!signIn);
+    console.log(signIn);
+  };
+
   return (
     <div
       className={cn(
@@ -94,16 +103,20 @@ export const LampContainer = ({ children, className }) => {
 
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
-          Join now
-        </button>
-        <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
-          Sign In
-        </button>
-      </div>
       <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
         {children}
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
+          <button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
+            Join now
+          </button>
+          <button
+            className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm"
+            onClick={handleSignInButtonClick}
+          >
+            Sign In
+          </button>
+          {signIn && <LoginScreen />}
+        </div>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ function Header() {
   });
   return (
     <motion.nav
-      className="navStyles font-openSansRegular md:text-lg text-sm"
+      className="navStyles font-openSansMedium md:text-lg text-sm"
       variants={parentVariants}
       animate={hidden ? "hidden" : "visible"}
       transition={{
@@ -41,7 +41,7 @@ function Header() {
         staggerChildren: 0.05,
       }}
     >
-      <p>Logo</p>
+      <p>LeetBragAI</p>
     </motion.nav>
   );
 }

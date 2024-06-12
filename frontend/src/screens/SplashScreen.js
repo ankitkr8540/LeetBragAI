@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { SplashFirst } from "../components/splashFirst";
 
 export default function SplashScreen() {
