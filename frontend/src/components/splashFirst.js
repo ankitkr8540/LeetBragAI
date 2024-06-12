@@ -4,16 +4,16 @@ import { cn } from "../utils/cn";
 
 export function SplashFirst() {
   return (
-    <LampContainer className="w-screen h-screen">
+    <LampContainer className="w-screen h-9">
       <motion.h1
-        initial={{ opacity: 0.5, y: 100 }}
+        initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
           delay: 0.3,
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="bg-gradient-to-br from-slate-300 to-slate-500 pb-44 bg-clip-text text-center 
+        className="bg-gradient-to-br from-slate-300 to-slate-500 pb-48 bg-clip-text text-center 
         text-4xl font-medium tracking-tight text-transparent md:text-6xl"
       >
         AI-Powered Professional Bragging <br />
@@ -33,10 +33,10 @@ export const LampContainer = ({ children, className }) => {
         className
       )}
     >
-      <div className="relative flex w-full min-h-screen flex-1 scale-y-125 items-center justify-center isolate z-0">
+      <div className="relative flex w-full min-h-screen flex-1 scale-y-125 items-center justify-center isolate z-0 mt-48 md:mt-0">
         <motion.div
-          initial={{ opacity: 0.5, width: "15vw" }}
-          whileInView={{ opacity: 1, width: "30vw" }}
+          initial={{ opacity: 0.5, width: "20vw", minWidth: "150px" }}
+          whileInView={{ opacity: 1, width: "40vw", minWidth: "150px" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -48,12 +48,12 @@ export const LampContainer = ({ children, className }) => {
           className="absolute inset-auto right-1/2 h-56 overflow-visible bg-gradient-conic from-cyan-500 
           via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
         >
-          <div className="absolute  w-[100%] left-0 bg-slate-950 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-          <div className="absolute  w-40 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+          <div className="absolute w-[100%] left-0 bg-slate-950 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+          <div className="absolute w-40 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0.5, width: "15vw" }}
-          whileInView={{ opacity: 1, width: "30vw" }}
+          initial={{ opacity: 0.5, width: "20vw", minWidth: "150px" }}
+          whileInView={{ opacity: 1, width: "40vw", minWidth: "150px" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -72,8 +72,8 @@ export const LampContainer = ({ children, className }) => {
         <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
         <div className="absolute inset-auto z-50 h-36 w-[28vw] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-3xl"></div>
         <motion.div
-          initial={{ width: "8vw" }}
-          whileInView={{ width: "16vw" }}
+          initial={{ width: "10vw", minWidth: "100px" }}
+          whileInView={{ width: "20vw", minWidth: "100px" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -82,8 +82,8 @@ export const LampContainer = ({ children, className }) => {
           className="absolute inset-auto z-30 h-36 -translate-y-[6vw] rounded-full bg-cyan-400 blur-2xl"
         ></motion.div>
         <motion.div
-          initial={{ width: "15vw" }}
-          whileInView={{ width: "30vw" }}
+          initial={{ width: "20vw", minWidth: "150px" }}
+          whileInView={{ width: "40vw", minWidth: "150px" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
