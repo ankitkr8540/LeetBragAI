@@ -44,7 +44,7 @@ export const LampContainer = ({ children, className }) => {
     >
       <div className="relative flex w-full min-h-screen flex-1 scale-y-125 items-center justify-center isolate z-0 mt-48 md:mt-0">
         <motion.div
-          initial={{ opacity: 0.5, width: "20vw", minWidth: "150px" }}
+          initial={{ opacity: 0.5, width: "20vw", minWidth: "70px" }}
           whileInView={{ opacity: 1, width: "40vw", minWidth: "150px" }}
           transition={{
             delay: 0.3,
@@ -61,7 +61,7 @@ export const LampContainer = ({ children, className }) => {
           <div className="absolute w-40 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0.5, width: "20vw", minWidth: "150px" }}
+          initial={{ opacity: 0.5, width: "20vw", minWidth: "70px" }}
           whileInView={{ opacity: 1, width: "40vw", minWidth: "150px" }}
           transition={{
             delay: 0.3,
@@ -81,7 +81,7 @@ export const LampContainer = ({ children, className }) => {
         <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
         <div className="absolute inset-auto z-50 h-36 w-[28vw] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-3xl"></div>
         <motion.div
-          initial={{ width: "10vw", minWidth: "100px" }}
+          initial={{ width: "10vw", minWidth: "70px" }}
           whileInView={{ width: "20vw", minWidth: "100px" }}
           transition={{
             delay: 0.3,
@@ -91,7 +91,7 @@ export const LampContainer = ({ children, className }) => {
           className="absolute inset-auto z-30 h-36 -translate-y-[6vw] rounded-full bg-cyan-400 blur-2xl"
         ></motion.div>
         <motion.div
-          initial={{ width: "20vw", minWidth: "150px" }}
+          initial={{ width: "20vw", minWidth: "70px" }}
           whileInView={{ width: "40vw", minWidth: "150px" }}
           transition={{
             delay: 0.3,
