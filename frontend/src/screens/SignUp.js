@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 const SignUp = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-slate-900 font-openSansMedium">
@@ -30,6 +31,7 @@ const SignUp = ({ onClose }) => {
                 id="email"
                 placeholder="Enter Your Email"
                 type="text"
+                className="text-slate-100"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -40,6 +42,7 @@ const SignUp = ({ onClose }) => {
               id="password"
               placeholder="Enter Password"
               type="password"
+              className="text-slate-100"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -49,8 +52,9 @@ const SignUp = ({ onClose }) => {
               id="confirm-password"
               placeholder="Confirm Password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              className="text-slate-100"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </LabelInputContainer>
           <button
