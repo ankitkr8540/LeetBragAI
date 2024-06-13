@@ -31,22 +31,6 @@ export const LampContainer = ({ children, className }) => {
   const [signIn, setSignIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
 
-  const handleSignInButtonClick = () => {
-    setSignIn(true);
-  };
-
-  const handleSignInModalClose = () => {
-    setSignIn(false);
-  };
-
-  const handleSignUpButtonClick = () => {
-    setSignUp(true);
-  };
-
-  const handleSignUpModalClose = () => {
-    setSignUp(false);
-  };
-
   return (
     <div
       className={cn(
@@ -120,18 +104,18 @@ export const LampContainer = ({ children, className }) => {
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
           <button
             className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm"
-            onClick={handleSignUpButtonClick}
+            onClick={() => setSignUp(true)}
           >
             Join now
           </button>
-          {signUp && <SignUp onClose={handleSignUpModalClose} />}
+          {signUp && <SignUp onClose={() => setSignUp(false)} />}
           <button
             className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm"
-            onClick={handleSignInButtonClick}
+            onClick={() => setSignIn(true)}
           >
             Sign In
           </button>
-          {signIn && <LoginScreen onClose={handleSignInModalClose} />}
+          {signIn && <LoginScreen onClose={() => setSignIn(false)} />}
         </div>
       </div>
     </div>
