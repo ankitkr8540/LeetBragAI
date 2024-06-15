@@ -18,6 +18,9 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_DETAILS_RESET,
+  CHECK_EMAIL_REQUEST,
+  CHECK_EMAIL_SUCCESS,
+  CHECK_EMAIL_FAIL,
 } from "../constants/userConstants";
 
 export const getUserInfo = (username) => async (dispatch, getState) => {
@@ -26,7 +29,7 @@ export const getUserInfo = (username) => async (dispatch, getState) => {
       type: GET_USER,
     });
 
-    const { data } = await api.get(`/${username}`);
+    const { data } = await api.instance.get(`/${username}`);
 
     dispatch({
       type: GET_USER_SUCCESS,
@@ -200,6 +203,37 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const checkUserEmail = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: CHECK_EMAIL_REQUEST,
+    });
+    // mailcheck.ai check email endpoint
+    const { data } = await api.emailValidationApi.get(`/email/${email}`);
+
+    if (data.status === 200) {
+      dispatch({
+        type: CHECK_EMAIL_SUCCESS,
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: CHECK_EMAIL_FAIL,
+        payload: { status: data.status, error: data.error },
+      });
+    }
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: CHECK_EMAIL_FAIL,
       payload: message,
     });
   }
