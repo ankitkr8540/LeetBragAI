@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import LabelInputContainer from "../components/LabelInputContainer";
 import { Input } from "../components/ui/Input";
 import { createPortal } from "react-dom";
-import { register, checkUserEmail } from "../actions/userAction";
+import { register, checkUserEmail, getUserInfo } from "../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = ({ onClose }) => {
@@ -17,28 +17,54 @@ const SignUp = ({ onClose }) => {
   const dispatch = useDispatch();
   const userSignUp = useSelector((state) => state.userRegister);
   const emailState = useSelector((state) => state.checkEmail);
+  const leetCodeInfo = useSelector((state) => state.leetCode);
+
+  const { emailLoading, emailError, emailData } = emailState;
+  const { leetcodeInfoLoading, leetCodeInfoError } = leetCodeInfo;
 
   console.log("sign up info ", userSignUp);
   console.log("email state ", emailState);
+  console.log("leetcode info ", leetCodeInfo);
 
   const handleSubmitSignUp = (e) => {
     e.preventDefault();
     setInputFieldErrorMessage("");
     setPasswordErrorMessage("");
+
+    // check if all input fields are filled
     if (name && email && username && password && confirmPassword) {
+      // check if the password is valid
       if (
         password.length === confirmPassword.length &&
-        password === confirmPassword
+        password === confirmPassword &&
+        password.length >= 12 &&
+        password.length >= 12
       ) {
         dispatch(checkUserEmail(email));
+        dispatch(getUserInfo(username));
 
-        if (emailState.error === "") {
+        if (
+          !emailLoading &&
+          emailError === "" &&
+          !leetcodeInfoLoading &&
+          leetCodeInfoError === ""
+        ) {
           dispatch(register(name, email, username, password));
-        } else {
-          setInputFieldErrorMessage("Please enter valid email");
         }
-      } else if (password !== confirmPassword) {
+        if (!leetcodeInfoLoading && leetCodeInfoError !== "") {
+          setInputFieldErrorMessage("Please enter correct leetcode username");
+        }
+        if (!emailLoading && emailError !== "") {
+          setInputFieldErrorMessage("Please enter valid email address");
+        }
+      }
+      if (password !== confirmPassword) {
         setPasswordErrorMessage("Passwords do not match");
+      }
+      if (password === confirmPassword && password.length < 12) {
+        setPasswordErrorMessage(
+          "Please make sure password has at least 12 characters"
+        );
       }
     } else {
       setInputFieldErrorMessage("Please fill in all fields");
@@ -62,28 +88,26 @@ const SignUp = ({ onClose }) => {
         </p>
 
         <form className="my-8" onSubmit={handleSubmitSignUp}>
-          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-2 mb-4">
-            <LabelInputContainer>
-              <Input
-                id="name"
-                placeholder="Enter Your Name"
-                type="text"
-                className="text-slate-100"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </LabelInputContainer>
-            <LabelInputContainer>
-              <Input
-                id="email"
-                placeholder="Enter Your Email"
-                type="text"
-                className="text-slate-100"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </LabelInputContainer>
-          </div>
+          <LabelInputContainer className="mb-4">
+            <Input
+              id="name"
+              placeholder="Enter Your Name"
+              type="text"
+              className="text-slate-100"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </LabelInputContainer>
+          <LabelInputContainer className="mb-4">
+            <Input
+              id="email"
+              placeholder="Enter Your Email"
+              type="text"
+              className="text-slate-100"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Input
               id="username"

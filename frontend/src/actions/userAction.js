@@ -216,17 +216,10 @@ export const checkUserEmail = (email) => async (dispatch) => {
     // mailcheck.ai check email endpoint
     const { data } = await api.emailValidationApi.get(`/email/${email}`);
 
-    if (data.status === 200) {
-      dispatch({
-        type: CHECK_EMAIL_SUCCESS,
-        payload: data,
-      });
-    } else {
-      dispatch({
-        type: CHECK_EMAIL_FAIL,
-        payload: { status: data.status, error: data.error },
-      });
-    }
+    dispatch({
+      type: CHECK_EMAIL_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     const message =
       error.response && error.response.data.message
