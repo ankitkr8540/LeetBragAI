@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LabelInputContainer from "../components/LabelInputContainer";
 import { Input } from "../components/ui/Input";
 import { createPortal } from "react-dom";
@@ -15,15 +15,36 @@ const SignUp = ({ onClose }) => {
   const [inputFieldErrorMessage, setInputFieldErrorMessage] = useState("");
   const [emailFieldErrorMessage, setEmailFieldErrorMessage] = useState("");
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
   const userSignUp = useSelector((state) => state.userRegister);
   const emailState = useSelector((state) => state.checkEmail);
   const userLeetCodeInfo = useSelector((state) => state.leetCode);
 
-  console.log("1 sign up info ", userSignUp);
-  console.log("2 email state ", emailState);
-  console.log("3 leetcode info ", userLeetCodeInfo);
+  console.log("1 email state ", emailState);
+  console.log("2 leetcode info ", userLeetCodeInfo);
+  console.log("3 sign up info ", userSignUp);
+
+  useEffect(() => {
+    if (submitted && emailState.error) {
+      setEmailFieldErrorMessage("Please enter valid email address");
+    } else {
+      setEmailFieldErrorMessage("");
+    }
+  }, [submitted, emailState.error]);
+
+  useEffect(() => {
+    if (
+      submitted &&
+      userLeetCodeInfo.leetCode_info &&
+      userLeetCodeInfo.leetCode_info.errors
+    ) {
+      setUsernameErrorMessage("Please enter valid Leetcode username");
+    } else {
+      setUsernameErrorMessage("");
+    }
+  }, [submitted, userLeetCodeInfo.leetCode_info]);
 
   const validateInputFields = (
     name,
@@ -41,8 +62,7 @@ const SignUp = ({ onClose }) => {
 
   const validateEmailAddress = (email, emailState) => {
     dispatch(checkUserEmail(email));
-    if (emailState && !emailState.loading && emailState.error) {
-      setEmailFieldErrorMessage("Please enter valid email address");
+    if (!emailState.loading && emailState.error) {
       return false;
     }
     return true;
@@ -55,7 +75,6 @@ const SignUp = ({ onClose }) => {
       userLeetCodeInfo.leetCode_info &&
       userLeetCodeInfo.leetCode_info.errors
     ) {
-      setUsernameErrorMessage("Please enter valid Leetcode username");
       return false;
     }
     return true;
@@ -82,6 +101,8 @@ const SignUp = ({ onClose }) => {
     setEmailFieldErrorMessage("");
     setUsernameErrorMessage("");
     setPasswordErrorMessage("");
+    setSubmitted(true);
+    console.log("clicked");
 
     // check if all inputs are filled in, if not show input error message
     // check if email address is valid, if not show email error message
@@ -182,6 +203,11 @@ const SignUp = ({ onClose }) => {
               {inputFieldErrorMessage}
             </p>
           )}
+          {passwordErrorMessage && (
+            <p className="text-red-500 text-sm mb-3 ml-1">
+              {passwordErrorMessage}
+            </p>
+          )}
           {emailFieldErrorMessage && (
             <p className="text-red-500 text-sm mb-3 ml-1">
               {emailFieldErrorMessage}
@@ -190,11 +216,6 @@ const SignUp = ({ onClose }) => {
           {usernameErrorMessage && (
             <p className="text-red-500 text-sm mb-3 ml-1">
               {usernameErrorMessage}
-            </p>
-          )}
-          {passwordErrorMessage && (
-            <p className="text-red-500 text-sm mb-3 ml-1">
-              {passwordErrorMessage}
             </p>
           )}
           <button
