@@ -24,7 +24,6 @@ const SignUp = ({ onClose }) => {
 
   console.log("1 email state ", emailState);
   console.log("2 leetcode info ", userLeetCodeInfo);
-  console.log("3 sign up info ", userSignUp);
 
   useEffect(() => {
     if (submitted && emailState.error) {
@@ -102,13 +101,14 @@ const SignUp = ({ onClose }) => {
     setUsernameErrorMessage("");
     setPasswordErrorMessage("");
     setSubmitted(true);
-    console.log("clicked");
 
     // check if all inputs are filled in, if not show input error message
     // check if email address is valid, if not show email error message
     // check if leetcode username is valid, if not show username error message
     // check if passwords are valid - match, >= 12, if not show password error message
     // it is possible user has multiple input errors at once, so errors in separate states
+
+    // todo: check if username, name, email already exist in the DB. if so prompt user to sign in
 
     const areInputsValid = validateInputFields(
       name,
@@ -128,6 +128,7 @@ const SignUp = ({ onClose }) => {
       arePasswordsValid
     ) {
       dispatch(register(name, email, username, password));
+      console.log("3 sign up info ", userSignUp);
     }
   };
 
