@@ -34,9 +34,7 @@ const SignUp = ({ onClose }) => {
     } else {
       setEmailFieldErrorMessage("");
     }
-  }, [submitted, emailState.error]);
 
-  useEffect(() => {
     if (
       submitted &&
       userLeetCodeInfo.leetCode_info &&
@@ -46,7 +44,7 @@ const SignUp = ({ onClose }) => {
     } else {
       setUsernameErrorMessage("");
     }
-  }, [submitted, userLeetCodeInfo.leetCode_info]);
+  }, [submitted, emailState.error, userLeetCodeInfo.leetCode_info]);
 
   const validateInputFields = (
     name,
@@ -77,22 +75,15 @@ const SignUp = ({ onClose }) => {
 
   const validateEmailAddress = (email) => {
     dispatch(checkUserEmail(email));
-    if (!emailState.loading && emailState.error) {
-      return false;
-    }
-    return true;
+    return !emailState.loading && !emailState.error;
   };
 
   const validateLeetCodeUsername = (username) => {
     dispatch(getUserInfo(username));
-    if (
+    return (
       !userLeetCodeInfo.loading &&
-      userLeetCodeInfo.leetCode_info &&
-      userLeetCodeInfo.leetCode_info.errors
-    ) {
-      return false;
-    }
-    return true;
+      !(userLeetCodeInfo.leetCode_info && userLeetCodeInfo.leetCode_info.errors)
+    );
   };
 
   const validatePassword = (password, confirmPassword) => {
@@ -112,7 +103,7 @@ const SignUp = ({ onClose }) => {
     return true;
   };
 
-  const handleSubmitSignUp = (e) => {
+  const handleSubmitSignUp = async (e) => {
     e.preventDefault();
     setInputFieldErrorMessage("");
     setEmailFieldErrorMessage("");
@@ -135,8 +126,8 @@ const SignUp = ({ onClose }) => {
       password,
       confirmPassword
     );
-    const isEmailValid = validateEmailAddress(email);
-    const isLeetCodeUsernameValid = validateLeetCodeUsername(username);
+    const isEmailValid = await validateEmailAddress(email);
+    const isLeetCodeUsernameValid = await validateLeetCodeUsername(username);
     const arePasswordsValid = validatePassword(password, confirmPassword);
 
     if (
@@ -166,7 +157,7 @@ const SignUp = ({ onClose }) => {
           Please Sign Up With Your Email and Your Leetcode Username
         </p>
 
-        <form className="my-8" onSubmit={(e) => handleSubmitSignUp(e)}>
+        <form className="my-8" onSubmit={handleSubmitSignUp}>
           <LabelInputContainer className="mb-4">
             <Input
               id="name"
