@@ -4,11 +4,14 @@ import LabelInputContainer from "../components/LabelInputContainer";
 import { login } from "../actions/userAction";
 import { Input } from "../components/ui/Input";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginScreen = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
@@ -18,6 +21,7 @@ const LoginScreen = ({ onClose }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(username, password));
+    navigate(`/${username}`);
   };
 
   return createPortal(

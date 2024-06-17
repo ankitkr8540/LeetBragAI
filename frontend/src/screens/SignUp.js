@@ -4,6 +4,7 @@ import { Input } from "../components/ui/Input";
 import { createPortal } from "react-dom";
 import { register, checkUserEmail, getUserInfo } from "../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ onClose }) => {
   const [name, setName] = useState("");
@@ -16,14 +17,16 @@ const SignUp = ({ onClose }) => {
   const [emailFieldErrorMessage, setEmailFieldErrorMessage] = useState("");
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const userSignUp = useSelector((state) => state.userRegister);
   const emailState = useSelector((state) => state.checkEmail);
   const userLeetCodeInfo = useSelector((state) => state.leetCode);
 
   console.log("1 email state ", emailState);
   console.log("2 leetcode info ", userLeetCodeInfo);
+  console.log("3 sign up info ", userSignUp);
 
   useEffect(() => {
     if (submitted && emailState.error) {
@@ -52,14 +55,27 @@ const SignUp = ({ onClose }) => {
     password,
     confirmPassword
   ) => {
-    if (!name || !email || !username || !password || !confirmPassword) {
+    // in case of white space
+    const trimName = name.trim();
+    const trimEmail = email.trim();
+    const trimUsername = username.trim();
+    const trimPassword = password.trim();
+    const trimConfirmPassword = confirmPassword.trim();
+
+    if (
+      !trimName ||
+      !trimEmail ||
+      !trimUsername ||
+      !trimPassword ||
+      !trimConfirmPassword
+    ) {
       setInputFieldErrorMessage("Please fill in all fields");
       return false;
     }
     return true;
   };
 
-  const validateEmailAddress = (email, emailState) => {
+  const validateEmailAddress = (email) => {
     dispatch(checkUserEmail(email));
     if (!emailState.loading && emailState.error) {
       return false;
@@ -80,11 +96,13 @@ const SignUp = ({ onClose }) => {
   };
 
   const validatePassword = (password, confirmPassword) => {
+    const trimPassword = password.trim();
+    const trimConfirmPassword = confirmPassword.trim();
     if (
-      password.length !== confirmPassword.length ||
-      password !== confirmPassword ||
-      password.length < 12 ||
-      confirmPassword.length < 12
+      trimPassword.length !== trimConfirmPassword.length ||
+      trimPassword !== trimConfirmPassword ||
+      trimPassword.length < 12 ||
+      trimConfirmPassword.length < 12
     ) {
       setPasswordErrorMessage(
         "Please make sure passwords match and have at least 12 characters"
@@ -110,25 +128,25 @@ const SignUp = ({ onClose }) => {
 
     // todo: check if username, name, email already exist in the DB. if so prompt user to sign in
 
-    const areInputsValid = validateInputFields(
+    const areInputsFilled = validateInputFields(
       name,
       email,
       username,
       password,
       confirmPassword
     );
-    const isEmailValid = validateEmailAddress(email, emailState);
+    const isEmailValid = validateEmailAddress(email);
     const isLeetCodeUsernameValid = validateLeetCodeUsername(username);
     const arePasswordsValid = validatePassword(password, confirmPassword);
 
     if (
-      areInputsValid &&
+      areInputsFilled &&
       isEmailValid &&
       isLeetCodeUsernameValid &&
       arePasswordsValid
     ) {
       dispatch(register(name, email, username, password));
-      console.log("3 sign up info ", userSignUp);
+      navigate(`/${username}`);
     }
   };
 
@@ -148,7 +166,7 @@ const SignUp = ({ onClose }) => {
           Please Sign Up With Your Email and Your Leetcode Username
         </p>
 
-        <form className="my-8" onSubmit={handleSubmitSignUp}>
+        <form className="my-8" onSubmit={(e) => handleSubmitSignUp(e)}>
           <LabelInputContainer className="mb-4">
             <Input
               id="name"
@@ -156,7 +174,7 @@ const SignUp = ({ onClose }) => {
               type="text"
               className="text-slate-100"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value.trim())}
             />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
@@ -166,7 +184,7 @@ const SignUp = ({ onClose }) => {
               type="text"
               className="text-slate-100"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.trim())}
             />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
@@ -176,7 +194,7 @@ const SignUp = ({ onClose }) => {
               className="text-slate-100"
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.trim())}
             />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
@@ -186,7 +204,7 @@ const SignUp = ({ onClose }) => {
               type="password"
               className="text-slate-100"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value.trim())}
             />
           </LabelInputContainer>
           <LabelInputContainer className="mb-3">
@@ -196,26 +214,26 @@ const SignUp = ({ onClose }) => {
               type="password"
               className="text-slate-100"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value.trim())}
             />
           </LabelInputContainer>
           {inputFieldErrorMessage && (
-            <p className="text-red-500 text-sm mb-3 ml-1">
+            <p className="text-red-500 text-sm mb-2 ml-1">
               {inputFieldErrorMessage}
             </p>
           )}
           {passwordErrorMessage && (
-            <p className="text-red-500 text-sm mb-3 ml-1">
+            <p className="text-red-500 text-sm mb-2 ml-1">
               {passwordErrorMessage}
             </p>
           )}
           {emailFieldErrorMessage && (
-            <p className="text-red-500 text-sm mb-3 ml-1">
+            <p className="text-red-500 text-sm mb-2 ml-1">
               {emailFieldErrorMessage}
             </p>
           )}
           {usernameErrorMessage && (
-            <p className="text-red-500 text-sm mb-3 ml-1">
+            <p className="text-red-500 text-sm mb-2 ml-1">
               {usernameErrorMessage}
             </p>
           )}

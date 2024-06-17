@@ -3,6 +3,7 @@ import "./App.css";
 import Clients from "./screens/Clients";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SplashScreen from "./screens/SplashScreen";
+import Home from "./screens/Home";
 import { ThemeContext } from "./Theme";
 import "./style.css";
 import Header from "./components/Header";
