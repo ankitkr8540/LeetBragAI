@@ -1,4 +1,5 @@
-import api from "../Api"; // adjust the path as necessary
+import instance from "../apis/leetCodeApi";
+import emailValidationApi from "../apis/emailApi";
 import axios from "axios";
 import {
   GET_USER,
@@ -29,7 +30,7 @@ export const getUserInfo = (username) => async (dispatch, getState) => {
       type: GET_USER,
     });
 
-    const { data } = await api.instance.get(`/${username}`);
+    const { data } = await instance.get(`/${username}`);
 
     dispatch({
       type: GET_USER_SUCCESS,
@@ -214,7 +215,7 @@ export const checkUserEmail = (email) => async (dispatch) => {
       type: CHECK_EMAIL_REQUEST,
     });
     // mailcheck.ai check email endpoint
-    const { data } = await api.emailValidationApi.get(`/email/${email}`);
+    const { data } = await emailValidationApi.get(`/email/${email}`);
 
     dispatch({
       type: CHECK_EMAIL_SUCCESS,

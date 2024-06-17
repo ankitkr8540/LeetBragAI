@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LabelInputContainer from "../components/LabelInputContainer";
 import { Input } from "../components/ui/Input";
 import { createPortal } from "react-dom";
@@ -13,61 +13,100 @@ const SignUp = ({ onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [inputFieldErrorMessage, setInputFieldErrorMessage] = useState("");
+  const [emailFieldErrorMessage, setEmailFieldErrorMessage] = useState("");
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
 
   const dispatch = useDispatch();
   const userSignUp = useSelector((state) => state.userRegister);
   const emailState = useSelector((state) => state.checkEmail);
-  const leetCodeInfo = useSelector((state) => state.leetCode);
+  const userLeetCodeInfo = useSelector((state) => state.leetCode);
 
-  const { emailLoading, emailError, emailData } = emailState;
-  const { leetcodeInfoLoading, leetCodeInfoError } = leetCodeInfo;
+  console.log("1 sign up info ", userSignUp);
+  console.log("2 email state ", emailState);
+  console.log("3 leetcode info ", userLeetCodeInfo);
 
-  console.log("sign up info ", userSignUp);
-  console.log("email state ", emailState);
-  console.log("leetcode info ", leetCodeInfo);
+  const validateInputFields = (
+    name,
+    email,
+    username,
+    password,
+    confirmPassword
+  ) => {
+    if (!name || !email || !username || !password || !confirmPassword) {
+      setInputFieldErrorMessage("Please fill in all fields");
+      return false;
+    }
+    return true;
+  };
+
+  const validateEmailAddress = (email, emailState) => {
+    dispatch(checkUserEmail(email));
+    if (emailState && !emailState.loading && emailState.error) {
+      setEmailFieldErrorMessage("Please enter valid email address");
+      return false;
+    }
+    return true;
+  };
+
+  const validateLeetCodeUsername = (username) => {
+    dispatch(getUserInfo(username));
+    if (
+      !userLeetCodeInfo.loading &&
+      userLeetCodeInfo.leetCode_info &&
+      userLeetCodeInfo.leetCode_info.errors
+    ) {
+      setUsernameErrorMessage("Please enter valid Leetcode username");
+      return false;
+    }
+    return true;
+  };
+
+  const validatePassword = (password, confirmPassword) => {
+    if (
+      password.length !== confirmPassword.length ||
+      password !== confirmPassword ||
+      password.length < 12 ||
+      confirmPassword.length < 12
+    ) {
+      setPasswordErrorMessage(
+        "Please make sure passwords match and have at least 12 characters"
+      );
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmitSignUp = (e) => {
     e.preventDefault();
     setInputFieldErrorMessage("");
+    setEmailFieldErrorMessage("");
+    setUsernameErrorMessage("");
     setPasswordErrorMessage("");
 
-    // check if all input fields are filled
-    if (name && email && username && password && confirmPassword) {
-      // check if the password is valid
-      if (
-        password.length === confirmPassword.length &&
-        password === confirmPassword &&
-        password.length >= 12 &&
-        password.length >= 12
-      ) {
-        dispatch(checkUserEmail(email));
-        dispatch(getUserInfo(username));
+    // check if all inputs are filled in, if not show input error message
+    // check if email address is valid, if not show email error message
+    // check if leetcode username is valid, if not show username error message
+    // check if passwords are valid - match, >= 12, if not show password error message
+    // it is possible user has multiple input errors at once, so errors in separate states
 
-        if (
-          !emailLoading &&
-          emailError === "" &&
-          !leetcodeInfoLoading &&
-          leetCodeInfoError === ""
-        ) {
-          dispatch(register(name, email, username, password));
-        }
-        if (!leetcodeInfoLoading && leetCodeInfoError !== "") {
-          setInputFieldErrorMessage("Please enter correct leetcode username");
-        }
-        if (!emailLoading && emailError !== "") {
-          setInputFieldErrorMessage("Please enter valid email address");
-        }
-      }
-      if (password !== confirmPassword) {
-        setPasswordErrorMessage("Passwords do not match");
-      }
-      if (password === confirmPassword && password.length < 12) {
-        setPasswordErrorMessage(
-          "Please make sure password has at least 12 characters"
-        );
-      }
-    } else {
-      setInputFieldErrorMessage("Please fill in all fields");
+    const areInputsValid = validateInputFields(
+      name,
+      email,
+      username,
+      password,
+      confirmPassword
+    );
+    const isEmailValid = validateEmailAddress(email, emailState);
+    const isLeetCodeUsernameValid = validateLeetCodeUsername(username);
+    const arePasswordsValid = validatePassword(password, confirmPassword);
+
+    if (
+      areInputsValid &&
+      isEmailValid &&
+      isLeetCodeUsernameValid &&
+      arePasswordsValid
+    ) {
+      dispatch(register(name, email, username, password));
     }
   };
 
@@ -128,7 +167,7 @@ const SignUp = ({ onClose }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </LabelInputContainer>
-          <LabelInputContainer className="mb-4">
+          <LabelInputContainer className="mb-3">
             <Input
               id="confirm-password"
               placeholder="Confirm Password"
@@ -138,11 +177,25 @@ const SignUp = ({ onClose }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </LabelInputContainer>
-          {passwordErrorMessage && (
-            <p className="text-red-500 text-sm">{passwordErrorMessage}</p>
-          )}
           {inputFieldErrorMessage && (
-            <p className="text-red-500 text-sm">{inputFieldErrorMessage}</p>
+            <p className="text-red-500 text-sm mb-3 ml-1">
+              {inputFieldErrorMessage}
+            </p>
+          )}
+          {emailFieldErrorMessage && (
+            <p className="text-red-500 text-sm mb-3 ml-1">
+              {emailFieldErrorMessage}
+            </p>
+          )}
+          {usernameErrorMessage && (
+            <p className="text-red-500 text-sm mb-3 ml-1">
+              {usernameErrorMessage}
+            </p>
+          )}
+          {passwordErrorMessage && (
+            <p className="text-red-500 text-sm mb-3 ml-1">
+              {passwordErrorMessage}
+            </p>
           )}
           <button
             className="bg-gradient-to-br relative group/btn bg-slate-100
