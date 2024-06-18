@@ -1,115 +1,94 @@
-import React, { useState, useEffect } from "react";
-import LabelInputContainer from "../components/LabelInputContainer";
-import { Input } from "../components/ui/Input";
-import { createPortal } from "react-dom";
-import { register, checkUserEmail, getUserInfo } from "../actions/userAction";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import LabelInputContainer from '../components/LabelInputContainer'
+import { Input } from '../components/ui/Input'
+import { createPortal } from 'react-dom'
+import { register, checkUserEmail, getUserInfo } from '../actions/userAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = ({ onClose }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
-  const [inputFieldErrorMessage, setInputFieldErrorMessage] = useState("");
-  const [emailFieldErrorMessage, setEmailFieldErrorMessage] = useState("");
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
+  const [inputFieldErrorMessage, setInputFieldErrorMessage] = useState('')
+  const [emailFieldErrorMessage, setEmailFieldErrorMessage] = useState('')
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const userSignUp = useSelector((state) => state.userRegister);
-  const emailState = useSelector((state) => state.checkEmail);
-  const userLeetCodeInfo = useSelector((state) => state.leetCode);
+  const userSignUp = useSelector((state) => state.userRegister)
+  const emailState = useSelector((state) => state.checkEmail)
+  const userLeetCodeInfo = useSelector((state) => state.leetCode)
 
-  console.log("1 email state ", emailState);
-  console.log("2 leetcode info ", userLeetCodeInfo);
-  console.log("3 sign up info ", userSignUp);
+  console.log('1 email state ', emailState)
+  console.log('2 leetcode info ', userLeetCodeInfo)
+  console.log('3 sign up info ', userSignUp)
 
   useEffect(() => {
     if (submitted && emailState.error) {
-      setEmailFieldErrorMessage("Please enter valid email address");
+      setEmailFieldErrorMessage('Please enter valid email address')
     } else {
-      setEmailFieldErrorMessage("");
+      setEmailFieldErrorMessage('')
     }
 
-    if (
-      submitted &&
-      userLeetCodeInfo.leetCode_info &&
-      userLeetCodeInfo.leetCode_info.errors
-    ) {
-      setUsernameErrorMessage("Please enter valid Leetcode username");
+    if (submitted && userLeetCodeInfo.leetCode_info && userLeetCodeInfo.leetCode_info.errors) {
+      setUsernameErrorMessage('Please enter valid Leetcode username')
     } else {
-      setUsernameErrorMessage("");
+      setUsernameErrorMessage('')
     }
-  }, [submitted, emailState.error, userLeetCodeInfo.leetCode_info]);
+  }, [submitted, emailState.error, userLeetCodeInfo.leetCode_info])
 
-  const validateInputFields = (
-    name,
-    email,
-    username,
-    password,
-    confirmPassword
-  ) => {
+  const validateInputFields = (name, email, username, password, confirmPassword) => {
     // in case of white space
-    const trimName = name.trim();
-    const trimEmail = email.trim();
-    const trimUsername = username.trim();
-    const trimPassword = password.trim();
-    const trimConfirmPassword = confirmPassword.trim();
+    const trimName = name.trim()
+    const trimEmail = email.trim()
+    const trimUsername = username.trim()
+    const trimPassword = password.trim()
+    const trimConfirmPassword = confirmPassword.trim()
 
-    if (
-      !trimName ||
-      !trimEmail ||
-      !trimUsername ||
-      !trimPassword ||
-      !trimConfirmPassword
-    ) {
-      setInputFieldErrorMessage("Please fill in all fields");
-      return false;
+    if (!trimName || !trimEmail || !trimUsername || !trimPassword || !trimConfirmPassword) {
+      setInputFieldErrorMessage('Please fill in all fields')
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   const validateEmailAddress = (email) => {
-    dispatch(checkUserEmail(email));
-    return !emailState.loading && !emailState.error;
-  };
+    dispatch(checkUserEmail(email))
+    return !emailState.loading && !emailState.error
+  }
 
   const validateLeetCodeUsername = (username) => {
-    dispatch(getUserInfo(username));
-    return (
-      !userLeetCodeInfo.loading &&
-      !(userLeetCodeInfo.leetCode_info && userLeetCodeInfo.leetCode_info.errors)
-    );
-  };
+    dispatch(getUserInfo(username))
+    return !userLeetCodeInfo.loading && !(userLeetCodeInfo.leetCode_info && userLeetCodeInfo.leetCode_info.errors)
+  }
 
   const validatePassword = (password, confirmPassword) => {
-    const trimPassword = password.trim();
-    const trimConfirmPassword = confirmPassword.trim();
+    const trimPassword = password.trim()
+    const trimConfirmPassword = confirmPassword.trim()
     if (
       trimPassword.length !== trimConfirmPassword.length ||
       trimPassword !== trimConfirmPassword ||
       trimPassword.length < 12 ||
       trimConfirmPassword.length < 12
     ) {
-      setPasswordErrorMessage(
-        "Please make sure passwords match and have at least 12 characters"
-      );
-      return false;
+      setPasswordErrorMessage('Please make sure passwords match and have at least 12 characters')
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   const handleSubmitSignUp = async (e) => {
-    e.preventDefault();
-    setInputFieldErrorMessage("");
-    setEmailFieldErrorMessage("");
-    setUsernameErrorMessage("");
-    setPasswordErrorMessage("");
-    setSubmitted(true);
+    e.preventDefault()
+    setInputFieldErrorMessage('')
+    setEmailFieldErrorMessage('')
+    setUsernameErrorMessage('')
+    setPasswordErrorMessage('')
+    setSubmitted(true)
 
     // check if all inputs are filled in, if not show input error message
     // check if email address is valid, if not show email error message
@@ -119,40 +98,24 @@ const SignUp = ({ onClose }) => {
 
     // todo: check if username, name, email already exist in the DB. if so prompt user to sign in
 
-    const areInputsFilled = validateInputFields(
-      name,
-      email,
-      username,
-      password,
-      confirmPassword
-    );
-    const isEmailValid = await validateEmailAddress(email);
-    const isLeetCodeUsernameValid = await validateLeetCodeUsername(username);
-    const arePasswordsValid = validatePassword(password, confirmPassword);
+    const areInputsFilled = validateInputFields(name, email, username, password, confirmPassword)
+    const isEmailValid = await validateEmailAddress(email)
+    const isLeetCodeUsernameValid = await validateLeetCodeUsername(username)
+    const arePasswordsValid = validatePassword(password, confirmPassword)
 
-    if (
-      areInputsFilled &&
-      isEmailValid &&
-      isLeetCodeUsernameValid &&
-      arePasswordsValid
-    ) {
-      dispatch(register(name, email, username, password));
-      navigate(`/${username}`);
+    if (areInputsFilled && isEmailValid && isLeetCodeUsernameValid && arePasswordsValid) {
+      dispatch(register(name, email, username, password))
+      navigate(`/${username}`)
     }
-  };
+  }
 
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 bg-slate-900 font-openSansMedium">
       <div className="max-w-md md:w-full w-3/4 mx-auto rounded-lg md:rounded-2xl p-4 md:p-8 shadow-input bg-slate-950 relative opacity-90">
-        <button
-          className="absolute top-2 right-2 text-white rounded-full px-2 py-1 text-sm"
-          onClick={onClose}
-        >
+        <button className="absolute top-2 right-2 text-white rounded-full px-2 py-1 text-sm" onClick={onClose}>
           Close
         </button>
-        <h2 className="font-bold md:text-xl text-neutral-200">
-          Welcome To LeetBragAI!
-        </h2>
+        <h2 className="font-bold md:text-xl text-neutral-200">Welcome To LeetBragAI!</h2>
         <p className="text-neutral-600 md:text-sm max-w-sm mt-2 dark:text-neutral-300 text-[12px]">
           Please Sign Up With Your Email and Your Leetcode Username
         </p>
@@ -208,26 +171,10 @@ const SignUp = ({ onClose }) => {
               onChange={(e) => setConfirmPassword(e.target.value.trim())}
             />
           </LabelInputContainer>
-          {inputFieldErrorMessage && (
-            <p className="text-red-500 text-sm mb-2 ml-1">
-              {inputFieldErrorMessage}
-            </p>
-          )}
-          {passwordErrorMessage && (
-            <p className="text-red-500 text-sm mb-2 ml-1">
-              {passwordErrorMessage}
-            </p>
-          )}
-          {emailFieldErrorMessage && (
-            <p className="text-red-500 text-sm mb-2 ml-1">
-              {emailFieldErrorMessage}
-            </p>
-          )}
-          {usernameErrorMessage && (
-            <p className="text-red-500 text-sm mb-2 ml-1">
-              {usernameErrorMessage}
-            </p>
-          )}
+          {inputFieldErrorMessage && <p className="text-red-500 text-sm mb-2 ml-1">{inputFieldErrorMessage}</p>}
+          {passwordErrorMessage && <p className="text-red-500 text-sm mb-2 ml-1">{passwordErrorMessage}</p>}
+          {emailFieldErrorMessage && <p className="text-red-500 text-sm mb-2 ml-1">{emailFieldErrorMessage}</p>}
+          {usernameErrorMessage && <p className="text-red-500 text-sm mb-2 ml-1">{usernameErrorMessage}</p>}
           <button
             className="bg-gradient-to-br relative group/btn bg-slate-100
                 block w-full text-slate-800
@@ -241,7 +188,7 @@ const SignUp = ({ onClose }) => {
       </div>
     </div>,
     document.body
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
